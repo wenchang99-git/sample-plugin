@@ -50,3 +50,8 @@ def get_product(product_id: str):
         )
 
     return product
+
+@app.get("/products")
+def list_products():
+    return list(products.values())
+
