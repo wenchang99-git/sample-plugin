@@ -1,5 +1,12 @@
 
 from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+
+class Product(BaseModel):
+    product_id: str
+    name: str
+    category: str
+    in_stock: bool
 
 app = FastAPI(
     title="Sample Product Plugin",
@@ -32,7 +39,7 @@ def home():
     }
 
 
-@app.get("/products/{product_id}")
+@app.get("/products/{product_id}", response_model=Product)
 def get_product(product_id: str):
     product = products.get(product_id)
 
